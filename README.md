@@ -1,9 +1,11 @@
 
 # General Assembly Project 3: City Spot
 
+Bete Yemane | Josh King | Lauren Bell | Alessandro Lepri
+
 ## Project Brief
 
-A group project to build a fullstack React application.
+The brief was to build a MERN stack application in a group and to have automated tests for at least one RESTful resource on the back-end. 
 
 ### Timeframe
 
@@ -11,7 +13,7 @@ A group project to build a fullstack React application.
 
 ## Technologies Used
 * React
-* Javascript(ES6)
+* JavaScript(ES6)
 * Node.js
 * MongoDB
 * Express
@@ -26,9 +28,9 @@ A group project to build a fullstack React application.
 * Git/Github
 * Heroku
 
-## Contributors
+## Deployed Web App
 
-Bete Yemane, Josh King, Lauren Bell, Alessandro Lepri
+---> https://city-spot.herokuapp.com/
 
 ## Our Application - City Spot
 
@@ -36,34 +38,68 @@ Bete Yemane, Josh King, Lauren Bell, Alessandro Lepri
 
 ## Project Summary
 
-City Spot is a web application where users can sign up and post images from their travels. The users can navigate to the city they visited to share their adventures with other travellers.
+City Spot is a social platform for travellers to showcase their recent trips. This is done by generating a 'post' on a city's show page, which includes:
+
+* an uploaded image
+* a brief summary of their experience/caption relating to their image
+
+To increase interactivity amongst the travellers, users can also:
+
+* add a comment to the post
+* 'like' the post
+
+10 posts with highest amounts of likes in the database will be featured on a popular posts page, where they are sorted by the amount of likes in descending order. The number of 'likes' are added on the post to visually display this popularity ranking on the page. Users are also able to 'like' the posts they see on that page, and will be navigated to the city's show page when they click on the post.
+
+As well as the posts, the city show pages also includes general city information such as population and region, event and restaurant recommendations, a youtube video of the city and a weekly weather forcast.
+ 
+This was a tool for users to find out information on cities they're planning to go to in the future.
 
 ## Users Journey
 
-When the user first visits City Spot, they have two paths to reach their desired city: the search bar where they can search for a city, or the links that takes them to each continent where they can select a city.
+When the user first visits City Spot, they have two paths to reach their desired city: a search bar, and links to each continent where they can select a city. 
 
 ![Screenshot 2019-03-16 at 12 34 27](https://user-images.githubusercontent.com/44004811/54475406-e7e46300-47e8-11e9-87c3-6099e41a5c8e.png)
 
-Once on a city's page, users can view information about that city, posts made by other users and a link to view event and restaurant recommendations.
+The city show page
 
-Users can also like and comment on the posts made by other users. Posts with high amounts of likes will be added to the popular posts page and will be able to like the posts they see on that page.
+![Screenshot 2019-03-17 at 23 09 08](https://user-images.githubusercontent.com/44004811/54499448-e2cb0500-4909-11e9-8dc5-2b7fc1ecb0b2.png)
 
-If a user would like to add a post they will have to register and login, and if the user has forgotten their password they can request an email with the link to change their password.
+A post on the city
 
-![Screenshot 2019-03-16 at 12 54 08](https://user-images.githubusercontent.com/44004811/54475586-af458900-47ea-11e9-8524-854cdcbe9512.png)
+![Screenshot 2019-03-17 at 23 09 24](https://user-images.githubusercontent.com/44004811/54499450-f2e2e480-4909-11e9-9f91-047a2cf6e611.png)
 
 The user has a profile page which contains their uploaded profile image, bio, a cover photo and their posts. They are also able to edit their bio and cover photo image.
 
 ## Process
 
 ### Development
+Planning was an integral part the process as our focus was to produce a backend API which could corehently work in the React front-end. We first began creating wireframes to work out this structure and general content placement of the website. It was clear our application would revolve around three elements: User, City and Continent and we established early on that posts will be added to a city's page by a user.
 
-We first began creating wireframes to work out the structure of the website and content placement. From then, we were able to establish the endpoints, models and routes needed for our app. We firstly began to develop our backend API using Mongoose, and created three of our main models; City, Continent, and User, as well as the controllers. We were then able to test our routes making adjustments needed to populate the accurate information we wanted to display, using Insomnia as our client. We then created a seeds file and added the data for both Continent and City schemas. 
+### Backend
 
+We firstly began to develop our backend API using MongoDB, and created three of our main Mongoose models; City, Continent, and User. As the the cities are within a continent catergory, a 'cities' virtual schema was made.
+
+```
+continentSchema.virtual('cities', {
+  ref: 'City',
+  localField: '_id',
+  foreignField: 'continent'
+})
+```
+To begin the database, we created a seeds file to add the data for all the Continents and a handful of Cities, which served two purposes: to create routes in the back-end which allowed the front-end to work with the data and as a visual tool, to help populate data when making adjustments to our API, using Insomnia as our client. 
+
+#### Authentication
+
+In order to carry out the authentication process, we used BCrypt to hash passwords in the backend and store it in the database so that BCrypt could compare it against the password given when logging in. We also used JSON Web Token to embed JSON into an encrypted token. This was incorporated in our login and register controller and is sent to the client when the users successfully authenticate. 
+
+Upon registering, we used Nodemailer to send an email to the users email which includes a link to verify the email they have registered with. The users are notified on the front-end by a flash message. 
+To experiement with Nodemailer and BCrypt even further, we also added a reset password option for users who have forgotten their password. The link navigates to a route where they input a new password which is undergoes the same backend process as the initial password setup.
+
+### Frontend
 Frontend setup
--setting up components and pages
--setting up forms
--connecting API requests to the front end.
+* setting up components and pages
+* setting up forms
+* connecting API requests to the front end.
 
 ### Task Management and Communication
 
@@ -75,38 +111,12 @@ We used Semantic UI as our CSS Framework which created a sleek and user friendly
 
 ## Challenges and Wins
 Challenges:
--email system
+* email system
 
 Wins:
 
-One of the biggest wins was the team communication. We had a group Slack channel where every member was equally active. This really helped us manage Git as a team, as we all got into the habit of informing each other when we were pushing to the development branch. Any errors or conflicts during this process, we notified the group channel where we all worked together to resolve the issues.
+One of the biggest wins was the team communication. We had a group Slack channel where every member was equally active. This really helped us manage Git as a team, as we all got into the habit of informing each other when we were pushing to the development branch. Any errors or conflicts during this process, we notified the group channel where we all worked together to resolve the issue.
 
-Another win was the implentation of our 'like' feature.
-
-```const postSchema = new mongoose.Schema({
-  city: { type: mongoose.Schema.ObjectId, ref: 'City' },
-  user: { type: mongoose.Schema.ObjectId, ref: 'User' },
-  image: { type: String, required: 'Please add an image'},
-  caption: { type: String, required: 'Please add a caption' },
-  comments: [commentSchema],
-  likes: [likeSchema]
-},{
-  timestamps: true
-})
-```
-```
-function likeCreateRoute(req, res, next) {
-  req.body.user = req.currentUser
-  Post
-    .findById(req.params.postId)
-    .then(post => {
-      post.likes.push(req.body)
-      return post.save()
-    })
-    .then(post => res.status(201).json(post))
-    .catch(next)
-}
-```
 
 ## Future features
 
