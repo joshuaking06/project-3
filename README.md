@@ -109,13 +109,7 @@ Being in a team of four, we decided the easiest way to divide the workload was t
 
 We used Semantic UI as our CSS Framework which created a sleek and user friendly design. 
 
-## Challenges and Wins
-Challenges:
-* email system
-
-Wins:
-
-One of the biggest wins was the team communication. We had a group Slack channel where every member was equally active. This really helped us manage Git as a team, as we all got into the habit of informing each other when we were pushing to the development branch. Any errors or conflicts during this process, we notified the group channel where we all worked together to resolve the issue.
+## Challenges
 
 
 ## Future features
