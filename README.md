@@ -105,11 +105,10 @@ Frontend setup
 
 Being in a team of four, we decided the easiest way to divide the workload was to have two people build the front-end, and two people build the back-end. We held stand-ups every morning and communicated via Slack to update each other with our progress.
 
-## Styling
+##  Personal Challenges
+As I focused primarily on the front end for this project, I encountered several challenges with regards to styling and state management. It was my first project using Semantic-UI-React and while the grid system of Semantic UI was very useful, I did find it quite difficult to style certain components, and often needed to resort to using important in the css files. 
 
-We used Semantic UI as our CSS Framework which created a sleek and user friendly design. 
-
-## Challenges
+Another big challenge for me was managing the city show page. Because of the way we configured the back end, we used one axios request for all of the data on the page, including all of the post and comment data. If I were to do the project again, I would not do it this way, and instead would opt to use at least two different requests. To make this possible I would go to the back end and change the way we populated certain endpoints, specifically the ```cities/:cityid/posts```endpoint. This would make it much easier to manage state between the different components, as they would be somewhat separate. 
 
 
 ## Future features
